@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import Button from 'antd/lib/button';
 import { Button, Input, List } from 'antd';
+import {changeValueInput, addItem, deleteItem} from './store/actionCreator';
 import store from './store';
 import Util from './Util';
 import './todo.css';
@@ -41,19 +42,21 @@ class TodoList extends Component {
 
     handleChange(e) {
         // 用store实现
-        const action = {
-            type: 'change_input_value',
-            inputValue: e.target.value,
-        }
+        // const action = {
+        //     type: 'change_input_value',
+        //     inputValue: e.target.value,
+        // }
+        const action = changeValueInput(e.target.value);
         store.dispatch(action);
     }
 
 
     handleDeleteItem(index, item) {
-        const action = {
-            type: 'delete_item',
-            index: index,
-        }
+        // const action = {
+        //     type: 'delete_item',
+        //     index: index,
+        // }
+        const action = deleteItem(index);
         store.dispatch(action);
         //store.getState();
     }
@@ -64,10 +67,11 @@ class TodoList extends Component {
                 uuid: Util.uuid(),
                 name: this.state.inputValue,
             }
-            const action = {
-                type: 'add_item',
-                item: item,
-            }
+            // const action = {
+            //     type: 'add_item',
+            //     item: item,
+            // }
+            const action = addItem(item);
             store.dispatch(action);
         }
     }
